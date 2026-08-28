@@ -1,0 +1,44 @@
+url
+
+estructura
+
+index.html
+
+elementos html:etiqueta de apertura
+               atributo(de propiedades y comportamientos)
+              contenido (entre las etiquetas)
+
+
+anidar-gerarquia
+descendientes
+
+html5
+
+doctipe html y html(elemento raiz o root)
+        
+html tiene dos desendientes:1 head y 2 body
+
+el head tien 3 desendientes:1 meta, 1meta t 1 title
+
+el body renderiza   
+
+
+p= parrafo
+
+h1= etiquetas
+
+
+
+hoy vemos header, mail y footer.
+<  
+
+https://www.flaticon.es/
+
+https://www.pexels.com/es-es/
+
+
+alt shift f
+
+
+html hint
+squoosh
