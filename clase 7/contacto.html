@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>huellitas contacto</title>
+</head>
+<body>
+
+    <header>
+        <a href="./index.html" aria-label="vinculo Inicio"><!--convertir un elemento html embuelto en un ancla-->
+        <img src="clase 6\recursos\imagenes\pata.png" alt="Logo huellitas" ><!--.\ es para buscar--><!--revisar direccion-->
+        </a>
+        
+        <nav>
+            <a href="./index.html">
+                Inicio
+            </a>
+
+            <a href="./contacto.html">
+                Inicio
+            </a>
+
+            <!--para envolver un elemento-->
+
+
+        </nav>
+
+    </header>
+
+    <main>
+
+    </main>
+    <h1> contacto</h1><!--en contacto habra un form-->
+    <h2>escribinos</h2>
+    <form action="./contacto.html" method="post"><!--usamos el post, ponemos un url, esto es hacia donde quiero embiarlo y como quiero mandarlo-->
+
+        <label for="id-nombre">nombre</label>
+
+        <input type="text" name="nombre" id="id-nombre"><!--seran variables, el id es un identificador que asociacia a la ej label-->
+        
+        <label for="id-email">email</label>
+        <input type="email" name="email" id="id-email">
+
+        <label for="">tipo mascota</label>
+        <select name="" id="id-tipo-mascota">
+            <option value="perro">perro</option>
+            <option value="gato">gato</option>
+            <option value="ave">ave</option>
+
+
+
+
+        </select>
+
+        <label for="id-comentario">comentario</label>
+        <textarea name="comentario" id="id-comentario"></textarea><!--valor que mandaremos al servidor-->
+        <button type="submit"> Enviar</button><!--lo semantico es accesivilidad-->
+                                              <!---->  
+         <!--<input type="button" value="enviar">-->
+
+
+
+    </form> <!--el form emvia datos, el get y post es como se embia, get es para pedir y post es para emviar-->
+    <h2>donde estamos</h2> <!--utilizar google map u openstripmap-->
+    <iframe src="iframe src=" https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3404.869841116244!2d-64.18888832428237!3d-31.41771199631561!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432a28382167cfb%3A0x1ef3ae3cd0407f65!2sCaseros%20100%2C%20X5000AHD%20C%C3%B3rdoba!5e0!3m2!1ses-419!2sar!4v1788179978936!5m2!1ses-419!2sar" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin">
+        <!--herramienta google stich para crear paginas web-->
+        <!--landing page es una pag de aterrizaje-->
+
+
+    <footer>
+        <!--ponemos lista desordenada, es un elemento compuestos, para items-->
+        <ul>
+            <li><!--lista-->
+                <a href="http:instagram..."></a>
+                @huellitas
+
+
+
+            </li>
+            <li> caceros, 1100</li>
+
+        </ul>
+
+
+
+    </footer>
+    
+</body>
+</html>
