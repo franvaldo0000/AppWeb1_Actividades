@@ -5,55 +5,75 @@
     <title>Contacto - Sofía Martínez</title>
 </head>
 <body>
-    
-    <p>
-        <a href="index.html">Inicio</a> | 
-        <a href="contacto.html">Contacto</a>
-    </p>
 
-    
+    <header>
+        <h1>Contacto</h1>
+        <nav>
+            <a href="index.html">Quién soy / Servicios</a> |
+            <a href="contacto.html">Contacto</a>
+        </nav>
+    </header>
 
-    <p>
-        ¿Tenés un proyecto en mente o querés renovar la imagen de tu negocio? Completá el siguiente formulario con tus datos y el detalle de lo que necesitás. Te responderé a la brevedad para coordinar una reunión.
+    <hr>
 
-    </p>
-
-    <h1> Informacion de Contacto</h1>
-
-    <form>
+    <section>
+        <h2>Hablemos de tu proyecto</h2>
         <p>
-            <label for="nombre">Nombre y apellido:</label><br>
-            <input type="text" id="nombre" name="nombre">
+            ¿Tenés un negocio y querés renovar tu identidad visual o el packaging de tus
+            productos? Completá el siguiente formulario y me pondré en contacto con vos
+            a la brevedad para conversar sobre tu proyecto.
         </p>
 
-        <p>
-            <label for="email">Correo electrónico:</label><br>
-            <input type="email" id="email" name="email">
-        </p>
+        <form action="mailto:contacto@sofiamartinez.com" method="post" enctype="text/plain">
 
-        <p>
-            <label for="telefono">Teléfono o WhatsApp:</label><br>
-            <input type="text" id="telefono" name="telefono">
-        </p>
+            <p>
+                <label for="nombre">Nombre completo:</label><br>
+                <input type="text" id="nombre" name="nombre" required>
+            </p>
 
-        <p>
-            <label for="servicio">Servicio de interés:</label><br>
-            <select id="servicio" name="servicio">
-                <option value="identidad">Identidad Visual</option>
-                <option value="packaging">Diseño de Packaging</option>
-                <option value="consultoria">Consultoría de Marca</option>
-                <option value="otro">Otro</option>
-            </select>
-        </p>
+            <p>
+                <label for="negocio">Nombre del negocio o emprendimiento:</label><br>
+                <input type="text" id="negocio" name="negocio">
+            </p>
 
-        <p>
-            <label for="mensaje">Mensaje o detalles del proyecto:</label><br>
-            <textarea id="mensaje" name="mensaje" rows="5" cols="40"></textarea>
-        </p>
+            <p>
+                <label for="email">Correo electrónico:</label><br>
+                <input type="email" id="email" name="email" required>
+            </p>
 
-        <p>
-            <button type="submit">Enviar consulta</button>
-        </p>
-    </form>
+            <p>
+                <label for="telefono">Teléfono:</label><br>
+                <input type="tel" id="telefono" name="telefono">
+            </p>
+
+            <p>
+                <label for="servicio">Servicio de interés:</label><br>
+                <select id="servicio" name="servicio">
+                    <option value="identidad">Identidad Visual y Logotipos</option>
+                    <option value="packaging">Diseño de Packaging</option>
+                    <option value="consultoria">Consultoría de Marca</option>
+                    <option value="otro">Otro / No estoy seguro</option>
+                </select>
+            </p>
+
+            <p>
+                <label for="mensaje">Contame sobre tu proyecto:</label><br>
+                <textarea id="mensaje" name="mensaje" rows="6" cols="40"></textarea>
+            </p>
+
+            <p>
+                <input type="submit" value="Enviar mensaje">
+                <input type="reset" value="Borrar formulario">
+            </p>
+
+        </form>
+    </section>
+
+    <hr>
+
+    <footer>
+        <p><a href="index.html">Volver a Quién soy / Servicios</a></p>
+    </footer>
+
 </body>
 </html>
