@@ -1,0 +1,83 @@
+/* sintasis css
+
+regla o rule
+selector{
+propiedad1 : valor;
+propiedad2 : valor;
+}
+
+selector universal
+*{
+}
+
+selector de tipo:
+*/
+body{
+    background-color: rgb(255, 230, 0);
+
+}
+
+
+header{
+    background-color: rgb(30, 255, 0);
+}
+
+a{
+
+    color: #000000;
+    text-decoration: none;
+    /*selector de clase*/
+}
+/* selector de clase*/
+/*.vinculos{
+
+    color: #222222;
+}*/
+
+nav a {
+
+    color: #222;
+}
+
+
+
+
+.header-principal{
+
+    background-color: #aaa
+}
+
+
+
+.header-principal{
+
+    background-color: #fff
+}
+
+
+/*.header-principal{
+
+    background-color: #fff
+}*/
+
+.main-principal{
+
+     background-color: aqua;
+
+
+}
+
+.footer-principal{
+
+     background-color: #ccc;
+
+
+}
+/* selector id*/
+#contactos{
+    background-color: #ccc;
+
+}
+
+/*selector atributo*/
+

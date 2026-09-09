@@ -1,0 +1,15 @@
+node.js
+
+
+como usar la terminal cmd en visual studio
+
+npm tiene que ser menos(-) g
+
+utilizamos npm para utilizar pnpm
+pn init
+
+package json
+
+
+no subir node modules a git
+

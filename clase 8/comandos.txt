@@ -1,0 +1,27 @@
+- instalar node js estable
+-verificar si se instalo
+
+- verificar version: 
+node -v 
+verificar version npm:
+npm -v 
+- instalar npmp(en el aula)
+npm i -g 
+
+en cada proyecto:
+- inicializar proyecto en la ruta que quiero iniciar en el desarrollo.
+pn init
+
+(esto crea el documento package.json)
+
+inicializar package five server:
+pn five-server
+- creacion de git ignore para ignorar carpeta y no se sube al repo( no le hacemos seguimiento)
+- para volver a instaler lo que figura el package json:
+pn install
+
+
+maneras de usar css: 
+no usar: 1 como atributo de html ej: strong
+
+
