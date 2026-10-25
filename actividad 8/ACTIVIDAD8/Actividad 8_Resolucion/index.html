@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<!--
+  =====================================================================
+  PROPUESTA DE ESTRUCTURA: MPA + SPA
+  =====================================================================
+  · index.html (Catálogo)  -> enfoque SPA.
+      El catálogo es la parte "viva" del sitio: filtrar cabañas por
+      capacidad/precio u ordenar o abrir el detalle de una cabaña son
+      acciones que conviene hacer SIN recargar la página (JS actualiza
+      solo la zona <main>, el header y el footer no se vuelven a pedir).
+      Hoy el HTML ya está en el servidor y la capa SPA se agregaría
+      después como mejora progresiva.
+  · reservas.html (Reservas) -> enfoque MPA.
+      Es un documento propio con su URL (compartible desde el enlace de
+      cada cabaña), con un formulario que se envía al servidor (POST) y
+      se responde con una página de confirmación. No necesita estado
+      compartido con el catálogo, es simple, accesible aunque falle el JS
+      y se indexa bien en buscadores.
+  Ir de index a reservas es una navegación MPA clásica (el navegador
+  pide un documento nuevo); dentro de index se navega estilo SPA.
+
+  RELACIÓN CON CSR / SSR
+  · MPA  ≈ SSR: el servidor entrega el HTML ya armado en cada
+    navegación. Bueno para SEO y velocidad de primera carga.
+  · SPA  ≈ CSR: el navegador descarga JS y arma/actualiza la vista en el
+    cliente. Ofrece transiciones fluidas pero la primera carga es más
+    pesada y el SEO exige cuidado.
+  · Solución híbrida elegida: el index llega renderizado desde el
+    servidor (SSR, para SEO y primera carga rápida) y luego el JS toma
+    el control del catálogo (CSR) para filtrar sin recargar.
+  =====================================================================
+-->
+<!-- lang="es": ayuda a lectores de pantalla (pronunciación) y a buscadores -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <!-- viewport: imprescindible para que la web sea responsive en celulares -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- description: el texto que suelen mostrar los buscadores en sus resultados -->
+    <meta name="description" content="Cuatro cabañas totalmente equipadas para alquilar al pie de la montaña, en San Javier, Traslasierras, Córdoba.">
+    <title>Retiro Sustentable - Catálogo</title>
+    <!-- Hoja de estilos externa: separa estructura (HTML) de presentación (CSS) y se cachea entre páginas -->
+    <link rel="stylesheet" href="./recursos/css/index.css">
+</head>
+<body>
+    <!--
+      <header> reemplaza al <div> original: es un elemento semántico que
+      indica "encabezado del sitio". Mismo layout en ambas páginas.
+    -->
+    <header class="encabezado">
+        <!--
+          Isologotipo como enlace al inicio. El atributo alt es clave porque:
+          1) los lectores de pantalla lo leen (al ser un enlace, el alt ES
+             el nombre del enlace; sin alt el enlace queda "vacío");
+          2) se muestra si la imagen no carga;
+          3) los buscadores lo usan para entender la imagen.
+        -->
+        <a class="encabezado__logo" href="index.html">
+            <img src="./recursos/imagenes/logo-rs.svg" alt="Retiro Sustentable, ir al inicio" width="1060" height="352">
+        </a>
+        <!-- <nav> agrupa los enlaces principales; aria-label lo identifica para lectores de pantalla -->
+        <nav class="encabezado__nav" aria-label="Principal">
+            <!-- <ul>/<li>: el menú es una lista de enlaces, es su estructura natural -->
+            <ul class="menu">
+                <!-- aria-current marca la página actual (accesibilidad); el CSS lo usa para resaltar -->
+                <li><a href="index.html" aria-current="page">Inicio</a></li>
+                <li><a href="index.html#cabanas">Cabañas</a></li>
+                <li><a href="reservas.html">Reservas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- <main>: contenido principal único de la página (uno solo por documento) -->
+    <main class="principal">
+        <!-- Un solo <h1> por página: el original tenía dos y rompía la jerarquía de títulos -->
+        <h1 class="principal__titulo">Catálogo de Cabañas</h1>
+        <p class="principal__intro">Bienvenido a nuestro catálogo de cabañas en San Javier, Traslasierras. Explorá nuestras opciones y encontrá la que mejor se adapte a tus necesidades.</p>
+
+        <!-- <section> con su propio <h2>: agrupa un tema (el listado). id para el enlace del menú -->
+        <section class="catalogo" id="cabanas" aria-labelledby="titulo-cabanas">
+            <h2 id="titulo-cabanas">Cabañas para alquiler</h2>
+
+            <!--
+              Cada cabaña es un <article>: es contenido independiente que
+              podría publicarse por sí solo (una ficha de producto).
+              Su título es <h3> porque cuelga del <h2> de la sección.
+            -->
+            <article class="cabana">
+                <!--
+                  <picture>: ofrece WebP (más liviano) y JPG de respaldo
+                  para navegadores viejos. width/height reservan el espacio
+                  y evitan saltos de diseño; loading="lazy" difiere la carga
+                  de lo que no se ve todavía.
+                -->
+                <picture>
+                    <source srcset="./recursos/imagenes/modelo1.webp" type="image/webp">
+                    <img class="cabana__imagen" src="./recursos/imagenes/modelo1.jpg" alt="Cabaña 1 de madera sobre pilotes en la ladera de la sierra, con galería iluminada al atardecer" width="1456" height="1088" loading="lazy">
+                </picture>
+                <div class="cabana__cuerpo">
+                    <h3 class="cabana__titulo">Cabaña 1</h3>
+                    <p class="cabana__descripcion">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <!-- <data value> guarda el valor numérico para máquinas y muestra el texto legible -->
+                    <p class="cabana__precio"><data value="85000">$85.000</data> por día</p>
+                    <a class="boton" href="reservas.html">Reservar Cabaña 1</a>
+                </div>
+            </article>
+
+            <article class="cabana">
+                <picture>
+                    <source srcset="./recursos/imagenes/modelo2.webp" type="image/webp">
+                    <img class="cabana__imagen" src="./recursos/imagenes/modelo2.jpg" alt="Cabaña 2 de una planta con amplia galería y vista a las sierras bajo un cielo azul" width="1456" height="1088" loading="lazy">
+                </picture>
+                <div class="cabana__cuerpo">
+                    <h3 class="cabana__titulo">Cabaña 2</h3>
+                    <p class="cabana__descripcion">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <p class="cabana__precio"><data value="78000">$78.000</data> por día</p>
+                    <a class="boton" href="reservas.html">Reservar Cabaña 2</a>
+                </div>
+            </article>
+
+            <article class="cabana">
+                <picture>
+                    <source srcset="./recursos/imagenes/modelo3.webp" type="image/webp">
+                    <img class="cabana__imagen" src="./recursos/imagenes/modelo3.jpg" alt="Cabaña 3 de dos plantas rodeada de pinos, con balcón y galería de madera" width="1456" height="1088" loading="lazy">
+                </picture>
+                <div class="cabana__cuerpo">
+                    <h3 class="cabana__titulo">Cabaña 3</h3>
+                    <p class="cabana__descripcion">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                    <p class="cabana__precio"><data value="98000">$98.000</data> por día</p>
+                    <a class="boton" href="reservas.html">Reservar Cabaña 3</a>
+                </div>
+            </article>
+
+            <article class="cabana">
+                <picture>
+                    <source srcset="./recursos/imagenes/modelo4.webp" type="image/webp">
+                    <img class="cabana__imagen" src="./recursos/imagenes/modelo4.jpg" alt="Cabaña 4 de dos plantas con balcón y faroles encendidos, con las sierras al fondo" width="1456" height="1088" loading="lazy">
+                </picture>
+                <div class="cabana__cuerpo">
+                    <h3 class="cabana__titulo">Cabaña 4</h3>
+                    <p class="cabana__descripcion">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p class="cabana__precio"><data value="98000">$98.000</data> por día</p>
+                    <a class="boton" href="reservas.html">Reservar Cabaña 4</a>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <!-- <footer> reemplaza al <div> original: pie del sitio con datos de autoría/legales -->
+    <footer class="pie">
+        <p class="pie__texto">&copy; 2026 Retiro Sustentable. Todos los derechos reservados.</p>
+        <p class="pie__texto">San Javier, Traslasierras, Córdoba</p>
+    </footer>
+</body>
+</html>

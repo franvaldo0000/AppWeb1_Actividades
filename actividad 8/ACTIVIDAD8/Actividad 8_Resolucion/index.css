@@ -1,0 +1,331 @@
+/* =====================================================================
+   ORGANIZACIÓN DEL ARCHIVO (de menor a mayor especificidad)
+   Se ordena así porque la cascada hace que, a igual especificidad,
+   gane la última regla; y a mayor especificidad, gana la más específica.
+   Empezar por lo general (tipo) y terminar en lo particular (clase)
+   evita tener que pisar reglas con !important y hace el CSS predecible:
+     1. Fuente        (@font-face)
+     2. Reinicio      (selector universal)         especificidad 0-0-0
+     3. Elementos     (selectores de tipo)         especificidad 0-0-1
+     4. Clases        (selectores de clase)        especificidad 0-1-0
+        agrupadas por bloque del layout: encabezado, principal, pie
+     5. Adaptación a pantallas (media query, al final para que
+        pueda sobreescribir lo anterior con la misma especificidad)
+   Los colores se definen en variables (custom properties) en :root:
+   se cambian en un solo lugar y mantienen coherencia en todo el sitio.
+   ===================================================================== */
+
+/* 1. FUENTE ---------------------------------------------------------- */
+/* Sora se carga desde el propio proyecto (no depende de servicios externos).
+   La ruta es relativa a este archivo: recursos/css/fuentes/ */
+@font-face {
+    font-family: 'Sora';
+    src: url(./fuentes/Sora-Regular.ttf) format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    /* swap: muestra texto con fuente de respaldo mientras Sora descarga */
+    font-display: swap;
+}
+
+/* Variables de diseño. Paleta tomada del isologotipo (#3f4d48 verde
+   oscuro y #aeb79d verde salvia) más neutros cálidos de la madera. */
+:root {
+    --verde-oscuro: #3f4d48;
+    --salvia: #aeb79d;
+    --fondo-barra: #e9ecdf;      /* fondo común de header y footer */
+    --fondo-pagina: #faf8f3;
+    --madera: #8a5a2b;
+    --texto: #26302c;
+    --borde: #cfd4c3;
+}
+
+/* 2. REINICIO -------------------------------------------------------- */
+/* Modelo de caja ALTERNATIVO verificado y aplicado: border-box hace que
+   width incluya padding y borde, así un ancho del 100% no desborda al
+   agregar relleno. Se hereda a pseudoelementos para que sea uniforme. */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* 3. ELEMENTOS (selectores de tipo) ---------------------------------- */
+/* Elemento raíz: acá se fija la tipografía del proyecto y el tamaño
+   base de 16px, que el resto hereda. Si se usara rem, todo escalaría
+   desde esta base. */
+html {
+    font-family: 'Sora', sans-serif; /* sans-serif: respaldo si falla la carga */
+    font-size: 16px;
+}
+
+body {
+    margin: 0;
+    /* Pantalla alta: flex en columna + min-height permite que el footer
+       quede abajo aunque haya poco contenido (ver "main" más abajo). */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--fondo-pagina);
+    color: var(--texto);
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    line-height: 1.25;
+    margin: 0 0 0.75rem;
+    color: var(--verde-oscuro);
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
+
+p {
+    margin: 0 0 1rem;
+}
+
+a {
+    color: var(--verde-oscuro);
+}
+
+img {
+    /* Las imágenes nunca superan a su contenedor: base del diseño responsive */
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none; /* los enlaces del menú no necesitan viñetas */
+}
+
+fieldset {
+    border: 1px solid var(--borde);
+    border-radius: 0.5rem;
+    margin: 0 0 1.5rem;
+    padding: 1rem 1.25rem 1.25rem;
+}
+
+legend {
+    padding: 0 0.5rem;
+    font-weight: 700;
+    color: var(--verde-oscuro);
+}
+
+/* Los controles de formulario no heredan la fuente por defecto: se fuerza */
+input,
+textarea,
+button {
+    font: inherit;
+}
+
+/* 4. CLASES, por bloque del layout ----------------------------------- */
+/* Se usan clases (nombres tipo BEM: bloque__elemento) porque tienen
+   especificidad baja y uniforme: ninguna regla "gana" por accidente y
+   se pueden reutilizar. Cada bloque tiene tres reglas de clase. */
+
+/* ---- BLOQUE 1: ENCABEZADO <header class="encabezado"> ---- */
+
+/* Regla 1: contenedor. Flex cambia el comportamiento EXTERNO (el header
+   pasa a ser un contenedor flex, y sus hijos, ítems flex) e INTERNO
+   (logo y nav se ordenan en fila en vez de apilarse como bloques).
+   space-between: logo a la izquierda, menú a la derecha. */
+.encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;          /* si no entran, el menú baja en pantallas chicas */
+    gap: 1rem;
+    padding: 0.75rem 2rem;
+    background-color: var(--fondo-barra); /* MISMO color que .pie */
+    border-bottom: 3px solid var(--salvia);
+}
+
+/* Regla 2: el logo con alto fijo y ancho automático para no deformarse */
+.encabezado__logo img {
+    height: 3.5rem;
+    width: auto;
+}
+
+/* Regla 3: la lista del menú también es flex (fila de enlaces) */
+.encabezado__nav .menu {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Estilo de los enlaces del menú (clase de apoyo al bloque) */
+.menu a {
+    display: block;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.menu a:hover,
+.menu a:focus-visible,
+.menu a[aria-current="page"] {
+    background-color: var(--verde-oscuro);
+    color: #fff;
+}
+
+/* ---- BLOQUE 2: CONTENIDO PRINCIPAL <main class="principal"> ---- */
+
+/* Regla 1: flex: 1 hace que main ocupe el espacio sobrante y empuje el
+   footer al fondo. max-width + margin auto centran y limitan el ancho. */
+.principal {
+    flex: 1;
+    width: 100%;
+    max-width: 70rem;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Regla 2: título de página */
+.principal__titulo {
+    font-size: 2.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--salvia);
+}
+
+/* Regla 3: texto de introducción con ancho de lectura cómodo (~70 caracteres) */
+.principal__intro {
+    max-width: 45rem;
+}
+
+/* Catálogo: grilla responsive sin media query, las tarjetas se acomodan
+   solas según el ancho disponible (mínimo 16rem cada una). */
+.catalogo {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* El h2 de la sección ocupa toda la fila de la grilla */
+.catalogo > h2 {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+}
+
+.cabana {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border: 1px solid var(--borde);
+    border-radius: 0.75rem;
+    overflow: hidden; /* recorta la imagen a las esquinas redondeadas */
+}
+
+.cabana__imagen {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+.cabana__cuerpo {
+    flex: 1; /* el cuerpo se estira: los botones quedan alineados abajo */
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1.25rem 1.25rem;
+}
+
+.cabana__descripcion {
+    flex: 1;
+}
+
+.cabana__precio {
+    font-weight: 700;
+    color: var(--madera);
+}
+
+/* Botón: un enlace (en el catálogo) y un <button> (en el formulario)
+   comparten la misma clase para verse igual */
+.boton {
+    display: inline-block;
+    align-self: flex-start;
+    padding: 0.7rem 1.4rem;
+    border: 0;
+    border-radius: 0.5rem;
+    background-color: var(--verde-oscuro);
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.boton:hover,
+.boton:focus-visible {
+    background-color: var(--madera);
+}
+
+/* Formulario de reservas */
+.contacto {
+    max-width: 38rem;
+}
+
+.formulario__etiqueta {
+    display: block;
+    margin: 0.75rem 0 0.25rem;
+    font-weight: 700;
+}
+
+.formulario__campo {
+    display: block;
+    width: 100%;           /* con border-box no desborda pese al padding */
+    padding: 0.65rem 0.75rem;
+    border: 1px solid var(--verde-oscuro);
+    border-radius: 0.5rem;
+    background-color: #fff;
+    color: var(--texto);
+}
+
+.formulario__campo:focus-visible {
+    outline: 3px solid var(--salvia); /* foco visible para teclado */
+    outline-offset: 2px;
+}
+
+.formulario__grupo legend {
+    font-size: 1.1rem;
+}
+
+textarea.formulario__campo {
+    resize: vertical; /* solo se agranda a lo alto, no rompe el layout */
+}
+
+/* ---- BLOQUE 3: PIE <footer class="pie"> ---- */
+
+/* Regla 1: mismo fondo que el encabezado (var compartida = no se desfasan) */
+.pie {
+    padding: 1.5rem 2rem;
+    background-color: var(--fondo-barra);
+    border-top: 3px solid var(--salvia);
+    text-align: center;
+}
+
+/* Regla 2: texto del pie, más discreto */
+.pie__texto {
+    margin: 0.25rem 0;
+    font-size: 0.875rem;
+}
+
+/* Regla 3: enlaces del pie (reservados para redes/contacto futuros) */
+.pie__enlace {
+    font-weight: 700;
+}
+
+/* 5. ADAPTACIÓN A PANTALLAS CHICAS ----------------------------------- */
+/* Va al final: al tener igual especificidad que lo anterior, la cascada
+   le da prioridad. Se centra el header y se reducen los márgenes. */
+@media (max-width: 40rem) {
+    .encabezado {
+        justify-content: center;
+        padding: 0.75rem 1rem;
+    }
+
+    .principal {
+        padding: 1.25rem 1rem;
+    }
+}

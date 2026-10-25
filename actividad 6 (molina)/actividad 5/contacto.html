@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultora de comunicacion digital</title>
+    <link rel="stylesheet" href="recusos/estilo/index.css">
+
+</head>
+<body>
+    <header class="encabezado-principal">
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <nav>
+                <a href="./index.html">
+                    <img src="./recusos/imagenes/consultora_200x200.jpeg" alt="Logo de la consultora" style="height: 50px; width: auto;">
+                </a>
+            </nav>
+            <h1 style="margin: 0;">Sofía Rossi | Consultora de Comunicación Digital</h1>
+
+        </div>
+        <nav class="vinculo">
+            <a href="./index.html">
+                Inicio
+            </a>
+            <a href="./contacto.html">
+                Contacto
+            </a>
+        </nav>
+    </header>
+    <main class="contenido-principal">
+        <h2>Contacto</h2>
+        <h3>Escribinos</h3>
+        <form action="./contacto.html" method="post">
+            <label for="id-nombre">nombre</label>
+            <input type="text" name="nombre" id="id-nombre">
+            <label for="id-mail"> mail</label>
+            <input type="email" name="mail" id="id-mail">
+            <label for="id-numero">numero</label>
+            <input type="number" name="numero" id="id_numero">
+
+            <label for="id-tipo-de-servicio">Tipo de Servicio</label>
+             <select name="tipo-servicio" id="id-tipo-de-servicio">
+                <option value="auditoria">Auditoria</option>
+                <option value="gestion-de-publicidad">Gestion de Publicidad</option>
+                <option value="estrategia">Estrategia</option>
+             </select>
+                  
+            <label for="id-comentario">comentario</label>
+            <textarea name="comentario" id="id-comentario">
+                comentario
+            </textarea>
+            <button type="button">
+                Enviar
+            </button>
+        </form>
+
+    </main>
+
+    <footer class="pie-principal">
+        <ul>
+            <li>
+                Telefono: 35985568
+            </li>
+            <li>
+                <a href="https://instagram.com/consultora">
+                    https://instagram.com/consultora
+                </a>
+            </li>
+            <li>
+                9 de julio 300
+            </li>
+        </ul>
+    </footer>
+    
+</body>
+</html>

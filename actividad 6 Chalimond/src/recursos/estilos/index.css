@@ -1,0 +1,124 @@
+/* JERARQUÍA
+universal
+tipo
+clase
+id
+*/
+
+/* GENERICOS */
+
+* {
+  box-sizing: border-box;
+  }
+
+/* RESET */
+
+html,
+body,
+h1,
+h2,
+h3,
+ul {
+padding: 0;
+margin: 0;
+}
+
+@font-face {
+font-family: Poppins;
+src: url(../fuentes/Poppins-Regular.ttf);
+}
+
+html {
+font-family: Poppins, Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+background-color: #eeeeee;
+}
+
+a {
+color: #ae2ece;
+text-decoration: none;
+}
+
+/* ENCABEZADO PRINCIPAL */
+
+.encabezado-principal {
+padding: 10px;
+background-color: #330558;
+border-bottom: 2px solid #330558;
+}
+
+.encabezado-principal img {
+width: 120px;
+}
+
+.encabezado-principal nav {
+width: 100%;
+padding: 15px;
+background-color: #bbbbbb;
+}
+
+.encabezado-principal nav a {
+margin-right: 20px;
+}
+
+/* CONTENIDO PRINCIPAL */
+
+.contenido-principal {
+padding: 20px;
+}
+
+.contenido-principal h1 {
+color: #330558;
+}
+
+.contenido-principal h2 {
+margin-top: 20px;
+margin-bottom: 10px;
+color: #330558;
+}
+
+.contenido-principal article {
+margin-top: 20px;
+padding: 10px;
+background-color: #ffffff;
+}
+
+.contenido-principal article img {
+width: 100%;
+max-width: 350px;
+}
+
+.contenido-principal article h3 {
+margin-top: 10px;
+}
+
+.contenido-principal form input {
+display: block;
+width: 100%;
+padding: 8px;
+}
+
+.contenido-principal form textarea {
+display: block;
+width: 100%;
+height: 100px;
+}
+
+.contenido-principal form button {
+margin-top: 15px;
+padding: 8px 15px;
+}
+
+/* PIE PRINCIPAL */
+
+.pie-principal {
+padding: 20px 10px 5px 10px;
+background-color: #bbbbbb;
+border-top: 2px solid #3b0000;
+}
+
+.pie-principal li {
+margin-bottom: 5px;
+}
